@@ -112,7 +112,8 @@
     .stops-overlay {
       position: absolute;
       top: 0; left: 0; right: 0;
-      padding: clamp(8px,2vw,14px) clamp(10px,3vw,18px) 0;
+      background: linear-gradient(to bottom, rgba(20,16,48,.82) 0%, rgba(20,16,48,.0) 100%);
+      padding: clamp(10px,2.5vw,16px) clamp(10px,3vw,18px) clamp(14px,3.5vw,22px);
       pointer-events: none;
     }
     .stops-track {
@@ -124,62 +125,71 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       flex: 1;
       cursor: pointer;
       background: none;
       border: none;
-      padding: 0;
+      padding: 2px 0;
     }
     .stop-dot {
-      width: clamp(22px,5.5vw,30px);
-      height: clamp(22px,5.5vw,30px);
-      border-radius: 7px;
-      background: rgba(255,255,255,.2);
-      border: 2px solid rgba(255,255,255,.45);
+      width: clamp(32px,8vw,44px);
+      height: clamp(32px,8vw,44px);
+      border-radius: 10px;
+      background: rgba(255,255,255,.18);
+      border: 2px solid rgba(255,255,255,.5);
       display: flex; align-items: center; justify-content: center;
       transition: background .15s, border-color .15s, transform .12s;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
     .stop-dot i {
-      font-size: clamp(11px,2.8vw,15px);
+      font-size: clamp(15px,3.8vw,20px);
       color: var(--white);
     }
     .stop-btn.active .stop-dot {
       background: var(--mint);
       border-color: var(--mint);
-      transform: scale(1.15);
-      box-shadow: 0 0 0 3px rgba(61,255,160,.3);
+      transform: scale(1.12);
+      box-shadow: 0 0 0 4px rgba(61,255,160,.28);
     }
     .stop-btn.active .stop-dot i { color: var(--purple); }
     .stop-btn.passed .stop-dot {
-      background: rgba(247,168,242,.55);
+      background: rgba(247,168,242,.45);
       border-color: var(--pink);
     }
     .stop-label {
-      font-size: clamp(8px,2vw,10px);
+      font-size: clamp(9px,2.3vw,12px);
       font-weight: 800;
       color: var(--white);
-      text-shadow: 0 1px 4px rgba(0,0,0,.7);
       text-align: center;
       line-height: 1.2;
-      max-width: 58px;
+      max-width: 64px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      background: rgba(20,16,48,.55);
+      padding: 2px 5px;
+      border-radius: 4px;
     }
-    .stop-btn.active .stop-label { color: var(--mint); text-shadow: none; }
-    .stop-btn.passed .stop-label { color: var(--pink); }
+    .stop-btn.active .stop-label {
+      color: var(--purple);
+      background: var(--mint);
+    }
+    .stop-btn.passed .stop-label {
+      color: var(--purple);
+      background: var(--pink);
+    }
 
     .stop-line {
       flex: 1;
       height: 2px;
-      background: rgba(255,255,255,.3);
-      margin-top: clamp(10px,2.7vw,14px);
+      background: rgba(255,255,255,.35);
+      margin-top: clamp(15px,3.8vw,21px);
       pointer-events: none;
       transition: background .2s;
     }
-    .stop-line.passed { background: rgba(247,168,242,.7); }
+    .stop-line.passed { background: var(--pink); }
 
     /* ── CONTROLS OVERLAY (bottom of video) ── */
     .controls-overlay {
@@ -328,7 +338,7 @@
 
   <!-- VIDEO + OVERLAYS -->
   <div class="video-section">
-    <video id="vid" playsinline preload="metadata">
+    <video id="vid" playsinline preload="metadata" muted>
       <source src="gemini_input.mp4" type="video/mp4">
     </video>
 
@@ -402,6 +412,7 @@
 
   const TOTAL = 29;
   const vid   = document.getElementById('vid');
+  vid.volume  = 0;
   let scrubbing = false;
 
   function fmt(s) {
