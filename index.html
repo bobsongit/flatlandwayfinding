@@ -6,109 +6,170 @@
   <title>Route naar Flatland – vanaf Rotterdam CS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <!-- Nunito as Futura web fallback (closest available on Google Fonts) -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --fl-ink: #1a1a1a;
-      --fl-muted: #6b6b6b;
-      --fl-accent: #f5a623;
-      --fl-accent-light: #fffbf0;
-      --fl-accent-hover: #fffdf5;
-      --fl-green: #1a9e75;
-      --fl-border: rgba(0,0,0,0.1);
-      --fl-surface: #f9f8f6;
-      --fl-bg: #ffffff;
-      --fl-page-bg: #f4f2ee;
+      --fl-purple:     #3d3561;
+      --fl-mint:       #3dffa0;
+      --fl-pink:       #f7a8f2;
+      --fl-white:      #ffffff;
+      --fl-ink:        #3d3561;
+      --fl-muted:      rgba(61,53,97,0.5);
+      --fl-border:     rgba(61,53,97,0.15);
+      --fl-page-bg:    #f0eef8;
+      --fl-card-bg:    #ffffff;
     }
 
     html { font-size: 16px; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Futura', 'Nunito', 'Century Gothic', Arial, sans-serif;
       background: var(--fl-page-bg);
       color: var(--fl-ink);
       min-height: 100vh;
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 2rem 1rem 4rem;
+      padding: 2.5rem 1rem 5rem;
     }
 
     .card {
-      background: var(--fl-bg);
-      border-radius: 16px;
-      border: 0.5px solid var(--fl-border);
-      padding: 2rem 2rem 2.5rem;
+      background: var(--fl-card-bg);
+      border-radius: 20px;
       width: 100%;
       max-width: 520px;
-      box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+      overflow: hidden;
+      box-shadow: 0 4px 40px rgba(61,53,97,0.13);
     }
 
+    /* ── Header banner ── */
+    .card-header {
+      background: var(--fl-purple);
+      padding: 2rem 2rem 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    /* F-logo blokken als achtergrondpatroon — getrouw aan het logo */
+    /* Rij 1: breed roze blok rechtsboven */
+    .card-header .bg-block-1 {
+      position: absolute;
+      top: 10px; right: 16px;
+      width: 88px; height: 44px;
+      background: var(--fl-pink);
+      border-radius: 4px;
+      opacity: .55;
+    }
+    /* Rij 2: smal roze blok links + leeg rechts */
+    .card-header .bg-block-2 {
+      position: absolute;
+      top: 62px; right: 110px;
+      width: 44px; height: 44px;
+      background: var(--fl-pink);
+      border-radius: 4px;
+      opacity: .55;
+    }
+    /* Rij 2: mint blok rechts (de 'F' balk) */
+    .card-header .bg-block-3 {
+      position: absolute;
+      top: 62px; right: 16px;
+      width: 44px; height: 44px;
+      background: var(--fl-mint);
+      border-radius: 4px;
+      opacity: .55;
+    }
+    /* Rij 3: breed roze blok linksonder */
+    .card-header .bg-block-4 {
+      position: absolute;
+      top: 114px; right: 110px;
+      width: 44px; height: 44px;
+      background: var(--fl-pink);
+      border-radius: 4px;
+      opacity: .35;
+    }
     .eyebrow {
-      font-size: 11px;
-      letter-spacing: .12em;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--fl-muted);
-      margin-bottom: .4rem;
+      color: var(--fl-mint);
+      margin-bottom: .5rem;
+      position: relative;
     }
     h1 {
-      font-family: 'DM Serif Display', serif;
       font-size: 28px;
-      line-height: 1.2;
-      color: var(--fl-ink);
-      margin-bottom: .4rem;
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--fl-white);
+      position: relative;
     }
-    h1 span { color: var(--fl-accent); }
+    h1 em {
+      font-style: normal;
+      color: var(--fl-mint);
+    }
     .subtitle {
-      font-size: 14px;
-      color: var(--fl-muted);
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      margin-top: .5rem;
       line-height: 1.55;
-      margin-bottom: 1.5rem;
+      position: relative;
     }
 
+    /* ── Footer logo PNG ── */
+    .fl-logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    /* ── Body padding ── */
+    .card-body { padding: 1.5rem 1.75rem 2rem; }
+
+    /* ── Steps row ── */
     .steps-row {
       display: flex;
       align-items: center;
-      background: var(--fl-surface);
+      background: var(--fl-page-bg);
       border-radius: 12px;
       padding: .75rem 1rem;
-      border: 0.5px solid var(--fl-border);
       margin-bottom: 1.5rem;
+      border: 1.5px solid var(--fl-border);
     }
     .step { display: flex; align-items: center; gap: 8px; }
     .step-dot {
-      width: 30px; height: 30px;
-      border-radius: 50%;
+      width: 32px; height: 32px;
+      border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .step-dot i { font-size: 15px; color: #fff; }
-    .step-label { font-size: 12px; font-weight: 500; color: var(--fl-ink); line-height: 1.2; }
-    .step-label small { display: block; font-weight: 400; color: var(--fl-muted); font-size: 11px; }
+    .step-dot i { font-size: 16px; color: var(--fl-purple); }
+    .step-label { font-size: 11px; font-weight: 800; color: var(--fl-ink); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
+    .step-label small { display: block; font-weight: 600; color: var(--fl-muted); font-size: 10px; text-transform: none; letter-spacing: 0; }
     .step-arrow {
-      flex: 1; height: 1px;
+      flex: 1; height: 2px;
       background: var(--fl-border);
       margin: 0 8px;
       position: relative;
     }
     .step-arrow::after {
       content: '';
-      position: absolute; right: -1px; top: -3px;
-      border: 4px solid transparent;
-      border-left: 5px solid var(--fl-border);
+      position: absolute; right: -1px; top: -4px;
+      border: 5px solid transparent;
+      border-left: 6px solid var(--fl-border);
     }
 
-    /* Native video */
+    /* ── Video ── */
     .video-wrap {
-      position: relative;
       width: 100%;
-      background: #111;
-      border-radius: 12px;
+      background: var(--fl-purple);
+      border-radius: 14px;
       overflow: hidden;
-      border: 0.5px solid var(--fl-border);
+      border: 2px solid var(--fl-border);
     }
     .video-wrap video {
       display: block;
@@ -117,33 +178,33 @@
       object-fit: cover;
     }
 
-    /* Controls */
+    /* ── Controls ── */
     .controls {
       margin-top: .85rem;
-      background: var(--fl-surface);
-      border-radius: 12px;
+      background: var(--fl-purple);
+      border-radius: 14px;
       padding: 1rem 1.25rem;
-      border: 0.5px solid var(--fl-border);
     }
     .controls-top {
       display: flex; align-items: center; gap: 12px;
       margin-bottom: .85rem;
     }
     .play-btn {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--fl-ink);
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: var(--fl-mint);
       border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      transition: background .15s;
+      transition: background .15s, transform .1s;
     }
-    .play-btn:hover { background: #333; }
-    .play-btn i { font-size: 17px; color: #fff; margin-left: 2px; }
+    .play-btn:hover { background: #2de88a; transform: scale(1.05); }
+    .play-btn:active { transform: scale(.97); }
+    .play-btn i { font-size: 18px; color: var(--fl-purple); margin-left: 2px; }
     .play-btn.playing i { margin-left: 0; }
     .time-info { flex: 1; min-width: 0; }
-    .time-display { font-size: 13px; font-weight: 500; color: var(--fl-ink); }
-    .time-sub { font-size: 11px; color: var(--fl-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .time-display { font-size: 14px; font-weight: 800; color: var(--fl-white); }
+    .time-sub { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     .scrubber-row { display: flex; align-items: center; gap: 10px; }
     .scrubber-wrap {
@@ -151,13 +212,13 @@
       height: 20px; display: flex; align-items: center; cursor: pointer;
     }
     .scrubber-track {
-      width: 100%; height: 4px;
-      background: var(--fl-border);
-      border-radius: 2px; overflow: hidden;
+      width: 100%; height: 5px;
+      background: rgba(255,255,255,.15);
+      border-radius: 3px; overflow: hidden;
     }
     .scrubber-fill {
-      height: 100%; background: var(--fl-accent);
-      border-radius: 2px; width: 0%;
+      height: 100%; background: var(--fl-mint);
+      border-radius: 3px; width: 0%;
     }
     .scrubber-wrap input[type=range] {
       position: absolute; width: 100%; opacity: 0;
@@ -165,83 +226,88 @@
     }
     .scrubber-thumb {
       position: absolute;
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: var(--fl-accent);
-      border: 2px solid #fff;
-      box-shadow: 0 1px 4px rgba(0,0,0,.25);
+      width: 15px; height: 15px;
+      border-radius: 4px;
+      background: var(--fl-mint);
+      border: 2px solid var(--fl-purple);
+      box-shadow: 0 1px 4px rgba(0,0,0,.3);
       top: 50%; transform: translateY(-50%) translateX(-7px);
       pointer-events: none;
       left: 0%;
     }
-    .time-end { font-size: 12px; color: var(--fl-muted); min-width: 32px; text-align: right; }
+    .time-end { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.45); min-width: 32px; text-align: right; }
 
-    .wp-section { margin-top: .85rem; }
+    /* ── Waypoints ── */
+    .wp-section { margin-top: 1.25rem; }
     .wp-title {
-      font-size: 11px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--fl-muted);
-      margin-bottom: .5rem;
+      font-size: 10px; font-weight: 800;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--fl-muted); margin-bottom: .6rem;
     }
     .waypoints {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 6px;
+      grid-template-columns: repeat(auto-fit, minmax(138px, 1fr));
+      gap: 7px;
     }
     .wp {
-      background: var(--fl-bg);
-      border: 0.5px solid var(--fl-border);
+      background: var(--fl-card-bg);
+      border: 1.5px solid var(--fl-border);
       border-radius: 10px;
       padding: .6rem .75rem;
       cursor: pointer;
-      transition: border-color .12s, background .12s;
+      transition: border-color .12s, background .12s, transform .1s;
       position: relative; overflow: hidden;
     }
-    .wp:hover { border-color: rgba(245,166,35,.5); background: var(--fl-accent-hover); }
-    .wp.active { border-color: var(--fl-accent); background: var(--fl-accent-light); }
+    .wp:hover { border-color: var(--fl-mint); background: #f3fff9; transform: translateY(-1px); }
+    .wp:active { transform: translateY(0); }
+    .wp.active {
+      border-color: var(--fl-mint);
+      background: #edfff6;
+    }
     .wp.active::before {
       content: ''; position: absolute;
       left: 0; top: 0; bottom: 0;
-      width: 3px; background: var(--fl-accent);
+      width: 4px; background: var(--fl-mint);
+      border-radius: 0 2px 2px 0;
     }
     .wp.passed:not(.active)::before {
       content: ''; position: absolute;
       left: 0; top: 0; bottom: 0;
-      width: 3px; background: var(--fl-green);
+      width: 4px; background: var(--fl-pink);
+      border-radius: 0 2px 2px 0;
     }
-    .wp-num { font-size: 10px; color: var(--fl-muted); margin-bottom: 2px; }
-    .wp-label { font-size: 12px; font-weight: 500; color: var(--fl-ink); line-height: 1.3; }
-    .wp-time { font-size: 11px; color: var(--fl-muted); margin-top: 2px; }
+    .wp-num { font-size: 9px; font-weight: 800; color: var(--fl-muted); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .08em; }
+    .wp-label { font-size: 11.5px; font-weight: 700; color: var(--fl-ink); line-height: 1.3; }
+    .wp-time { font-size: 10px; font-weight: 600; color: var(--fl-muted); margin-top: 3px; }
 
+    /* ── Note ── */
     .note {
       margin-top: 1rem;
-      font-size: 12px; color: var(--fl-muted);
+      font-size: 11px; font-weight: 600; color: var(--fl-muted);
       display: flex; gap: 6px; align-items: flex-start; line-height: 1.5;
     }
-    .note i { flex-shrink: 0; margin-top: 1px; font-size: 14px; color: var(--fl-accent); }
+    .note i { flex-shrink: 0; margin-top: 1px; font-size: 13px; color: var(--fl-mint); filter: brightness(.8); }
 
+    /* ── Footer ── */
     .footer {
       margin-top: 1.75rem;
       padding-top: 1.25rem;
-      border-top: 0.5px solid var(--fl-border);
+      border-top: 1.5px solid var(--fl-border);
       display: flex; align-items: center; justify-content: space-between;
       gap: 12px;
     }
-    .footer-brand {
-      font-family: 'DM Serif Display', serif;
-      font-size: 16px; color: var(--fl-ink);
-    }
-    .footer-brand span { color: var(--fl-accent); }
     .footer-address {
-      font-size: 11px; color: var(--fl-muted);
-      text-align: right; line-height: 1.5;
+      font-size: 10.5px; font-weight: 600; color: var(--fl-muted);
+      text-align: right; line-height: 1.55;
     }
     .footer-address a { color: var(--fl-muted); text-decoration: none; }
-    .footer-address a:hover { color: var(--fl-ink); }
+    .footer-address a:hover { color: var(--fl-purple); }
 
     @media (max-width: 480px) {
-      body { padding: 1rem .75rem 3rem; }
-      .card { padding: 1.5rem 1.25rem 2rem; }
-      h1 { font-size: 24px; }
+      body { padding: 1rem .5rem 3rem; }
+      .card-header { padding: 1.5rem 1.25rem 1.5rem; }
+      h1 { font-size: 23px; }
+      .card-body { padding: 1.25rem 1.25rem 1.75rem; }
       .steps-row { flex-wrap: wrap; gap: 8px; }
       .step-arrow { display: none; }
     }
@@ -250,78 +316,91 @@
 <body>
 
 <main class="card">
-  <p class="eyebrow">Bezoekersroute</p>
-  <h1>Route naar <span>Flatland</span></h1>
-  <p class="subtitle">Van Rotterdam Centraal tot aan de lift. Speel de video af of klik op een waypoint om direct naar dat moment te springen.</p>
 
-  <div class="steps-row">
-    <div class="step">
-      <div class="step-dot" style="background:var(--fl-accent)">
-        <i class="ti ti-train" aria-hidden="true"></i>
-      </div>
-      <div class="step-label">Rotterdam CS<small>Startpunt</small></div>
-    </div>
-    <div class="step-arrow"></div>
-    <div class="step">
-      <div class="step-dot" style="background:#999">
-        <i class="ti ti-walk" aria-hidden="true"></i>
-      </div>
-      <div class="step-label">Weena Passage<small>~5 min lopen</small></div>
-    </div>
-    <div class="step-arrow"></div>
-    <div class="step">
-      <div class="step-dot" style="background:var(--fl-green)">
-        <i class="ti ti-door-enter" aria-hidden="true"></i>
-      </div>
-      <div class="step-label">Flatland<small>Lift / 5e verdieping</small></div>
-    </div>
+  <div class="card-header">
+    <div class="bg-block-1" aria-hidden="true"></div>
+    <div class="bg-block-2" aria-hidden="true"></div>
+    <div class="bg-block-3" aria-hidden="true"></div>
+    <div class="bg-block-4" aria-hidden="true"></div>
+    <p class="eyebrow">Bezoekersroute</p>
+    <h1>Route naar<br><em>Flatland</em></h1>
+    <p class="subtitle">Van Rotterdam Centraal tot aan de lift. Speel af of spring naar een waypoint.</p>
   </div>
 
-  <div class="video-wrap">
-    <video id="vid" playsinline preload="metadata">
-      <source src="gemini_input.mp4" type="video/mp4">
-      Je browser ondersteunt geen video.
-    </video>
-  </div>
+  <div class="card-body">
 
-  <div class="controls">
-    <div class="controls-top">
-      <button class="play-btn" id="playBtn" aria-label="Afspelen">
-        <i class="ti ti-player-play" id="playIcon"></i>
-      </button>
-      <div class="time-info">
-        <div class="time-display" id="timeDisplay">0:00</div>
-        <div class="time-sub" id="timeSub">Rotterdam Centraal – startpunt</div>
-      </div>
-    </div>
-    <div class="scrubber-row">
-      <div class="scrubber-wrap">
-        <div class="scrubber-track">
-          <div class="scrubber-fill" id="scrubFill"></div>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-dot" style="background:var(--fl-mint)">
+          <i class="ti ti-train" aria-hidden="true"></i>
         </div>
-        <div class="scrubber-thumb" id="scrubThumb"></div>
-        <input type="range" id="scrubber" min="0" max="1000" value="0" step="1" aria-label="Videopositie">
+        <div class="step-label">Rotterdam CS<small>Startpunt</small></div>
       </div>
-      <span class="time-end" id="timeEnd">0:29</span>
+      <div class="step-arrow"></div>
+      <div class="step">
+        <div class="step-dot" style="background:var(--fl-pink)">
+          <i class="ti ti-walk" aria-hidden="true"></i>
+        </div>
+        <div class="step-label">Weena Passage<small>~5 min lopen</small></div>
+      </div>
+      <div class="step-arrow"></div>
+      <div class="step">
+        <div class="step-dot" style="background:var(--fl-purple); border: 2px solid var(--fl-border)">
+          <i class="ti ti-door-enter" style="color:var(--fl-mint)" aria-hidden="true"></i>
+        </div>
+        <div class="step-label">Flatland<small>12e verdieping</small></div>
+      </div>
     </div>
-  </div>
 
-  <div class="wp-section">
-    <p class="wp-title">Waypoints — klik om direct te springen</p>
-    <div class="waypoints" id="waypoints" role="list"></div>
-  </div>
-
-  <div class="note">
-    <i class="ti ti-info-circle" aria-hidden="true"></i>
-    <span>Groene streep = al gepasseerd &nbsp;·&nbsp; Oranje streep = huidige positie. Klik een waypoint om direct naar dat moment te springen.</span>
-  </div>
-
-  <div class="footer">
-    <div class="footer-brand">Flat<span>land</span></div>
-    <div class="footer-address">
-      Weena 200, 3012 NJ Rotterdam<br>
-      <a href="https://flatland.nl" target="_blank" rel="noopener">flatland.nl</a>
+    <div class="video-wrap">
+      <video id="vid" playsinline preload="metadata">
+        <source src="gemini_input.mp4" type="video/mp4">
+        Je browser ondersteunt geen video.
+      </video>
     </div>
+
+    <div class="controls">
+      <div class="controls-top">
+        <button class="play-btn" id="playBtn" aria-label="Afspelen">
+          <i class="ti ti-player-play" id="playIcon"></i>
+        </button>
+        <div class="time-info">
+          <div class="time-display" id="timeDisplay">0:00</div>
+          <div class="time-sub" id="timeSub">Rotterdam Centraal – startpunt</div>
+        </div>
+      </div>
+      <div class="scrubber-row">
+        <div class="scrubber-wrap">
+          <div class="scrubber-track">
+            <div class="scrubber-fill" id="scrubFill"></div>
+          </div>
+          <div class="scrubber-thumb" id="scrubThumb"></div>
+          <input type="range" id="scrubber" min="0" max="1000" value="0" step="1" aria-label="Videopositie">
+        </div>
+        <span class="time-end" id="timeEnd">0:29</span>
+      </div>
+    </div>
+
+    <div class="wp-section">
+      <p class="wp-title">Waypoints — klik om direct te springen</p>
+      <div class="waypoints" id="waypoints" role="list"></div>
+    </div>
+
+    <div class="note">
+      <i class="ti ti-info-circle" aria-hidden="true"></i>
+      <span>Roze streep = gepasseerd &nbsp;·&nbsp; Groen = huidige positie. Klik een waypoint om direct naar dat moment te springen.</span>
+    </div>
+
+    <div class="footer">
+      <img src="logo_flatland.png" alt="Flatland" class="fl-logo-img">
+      <div class="footer-address">
+        Weena 70, 12e verdieping · 3012 CM Rotterdam<br>
+        <a href="https://flatland.nl" target="_blank" rel="noopener">flatland.nl</a>
+        &nbsp;·&nbsp;
+        <a href="tel:+31106690079">010 669 0079</a>
+      </div>
+    </div>
+
   </div>
 </main>
 
@@ -339,6 +418,7 @@
     { pct: 96.6, time: "0:28", label: "In de lift" },
   ];
 
+  const TOTAL = 29;
   const vid = document.getElementById('vid');
   let scrubbing = false;
 
@@ -353,21 +433,19 @@
     const el = document.createElement('div');
     el.className = 'wp' + (i === 0 ? ' active' : '');
     el.setAttribute('role', 'listitem');
-    el.innerHTML = `<div class="wp-num">stap ${i + 1}/10</div><div class="wp-label">${wp.label}</div><div class="wp-time">${wp.time}</div>`;
+    el.innerHTML = `<div class="wp-num">stap ${i + 1} / 10</div><div class="wp-label">${wp.label}</div><div class="wp-time">${wp.time}</div>`;
     el.addEventListener('click', () => {
-      const dur = vid.duration || 29;
-      vid.currentTime = (wp.pct / 100) * dur;
+      vid.currentTime = (wp.pct / 100) * (vid.duration || TOTAL);
       vid.play();
     });
     wpContainer.appendChild(el);
   });
 
-  // Update UI from video state
   function updateUI() {
-    const dur = vid.duration || 29;
-    const t = vid.currentTime || 0;
+    const dur = vid.duration || TOTAL;
+    const t   = vid.currentTime || 0;
     const frac = t / dur;
-    const pct = frac * 100;
+    const pct  = frac * 100;
 
     document.getElementById('scrubber').value = Math.round(frac * 1000);
     document.getElementById('scrubFill').style.width = pct + '%';
@@ -385,18 +463,13 @@
     });
   }
 
-  // Set total duration once known
   vid.addEventListener('loadedmetadata', () => {
     document.getElementById('timeEnd').textContent = fmt(vid.duration);
   });
 
-  // Sync scrubber while playing
-  vid.addEventListener('timeupdate', () => {
-    if (!scrubbing) updateUI();
-  });
+  vid.addEventListener('timeupdate', () => { if (!scrubbing) updateUI(); });
 
-  // Play/pause button
-  const playBtn = document.getElementById('playBtn');
+  const playBtn  = document.getElementById('playBtn');
   const playIcon = document.getElementById('playIcon');
 
   function syncPlayBtn() {
@@ -404,40 +477,31 @@
     playIcon.className = playing ? 'ti ti-player-pause' : 'ti ti-player-play';
     playBtn.classList.toggle('playing', playing);
     playBtn.setAttribute('aria-label', playing ? 'Pauzeren' : 'Afspelen');
+    playIcon.style.marginLeft = playing ? '0' : '2px';
   }
 
-  playBtn.addEventListener('click', () => {
-    if (vid.paused) { vid.play(); } else { vid.pause(); }
-  });
-
-  vid.addEventListener('play', syncPlayBtn);
+  playBtn.addEventListener('click', () => { vid.paused ? vid.play() : vid.pause(); });
+  vid.addEventListener('play',  syncPlayBtn);
   vid.addEventListener('pause', syncPlayBtn);
   vid.addEventListener('ended', () => { syncPlayBtn(); updateUI(); });
 
-  // Scrubber input
   const scrubEl = document.getElementById('scrubber');
-
-  scrubEl.addEventListener('mousedown', () => { scrubbing = true; });
+  scrubEl.addEventListener('mousedown',  () => { scrubbing = true; });
   scrubEl.addEventListener('touchstart', () => { scrubbing = true; }, { passive: true });
-
   scrubEl.addEventListener('input', e => {
     const frac = e.target.value / 1000;
-    const dur = vid.duration || 29;
-    // Update visual only while dragging
-    const pct = frac * 100;
-    document.getElementById('scrubFill').style.width = pct + '%';
-    document.getElementById('scrubThumb').style.left = pct + '%';
+    const dur  = vid.duration || TOTAL;
+    const pct  = frac * 100;
+    document.getElementById('scrubFill').style.width  = pct + '%';
+    document.getElementById('scrubThumb').style.left  = pct + '%';
     document.getElementById('timeDisplay').textContent = fmt(frac * dur);
   });
-
   scrubEl.addEventListener('change', e => {
-    const frac = e.target.value / 1000;
-    vid.currentTime = frac * (vid.duration || 29);
+    vid.currentTime = (e.target.value / 1000) * (vid.duration || TOTAL);
     scrubbing = false;
     updateUI();
   });
-
-  scrubEl.addEventListener('mouseup', () => { scrubbing = false; });
+  scrubEl.addEventListener('mouseup',  () => { scrubbing = false; });
   scrubEl.addEventListener('touchend', () => { scrubbing = false; });
 </script>
 </body>
