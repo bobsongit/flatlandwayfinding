@@ -2,499 +2,425 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
-  <title>Route naar Flatland – vanaf Rotterdam CS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Nunito as Futura web fallback (closest available on Google Fonts) -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Route naar Flatland</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --fl-purple:     #3d3561;
-      --fl-mint:       #3dffa0;
-      --fl-pink:       #f7a8f2;
-      --fl-white:      #ffffff;
-      --fl-ink:        #3d3561;
-      --fl-muted:      rgba(61,53,97,0.5);
-      --fl-border:     rgba(61,53,97,0.15);
-      --fl-page-bg:    #f0eef8;
-      --fl-card-bg:    #ffffff;
+      --purple: #3d3561;
+      --mint:   #3dffa0;
+      --pink:   #f7a8f2;
+      --white:  #ffffff;
+      --muted:  rgba(61,53,97,0.45);
+      --border: rgba(61,53,97,0.13);
     }
 
-    html { font-size: 16px; }
-
-    body {
+    html, body {
+      height: 100%;
       font-family: 'Futura', 'Nunito', 'Century Gothic', Arial, sans-serif;
-      background: var(--fl-page-bg);
-      color: var(--fl-ink);
-      min-height: 100vh;
+      background: #f0eef8;
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 2.5rem 1rem 5rem;
+      padding: 1.5rem 1rem 2rem;
     }
 
     .card {
-      background: var(--fl-card-bg);
-      border-radius: 20px;
       width: 100%;
-      max-width: 520px;
+      max-width: 400px;
+      background: #fff;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 40px rgba(61,53,97,0.13);
+      box-shadow: 0 4px 40px rgba(61,53,97,0.14);
     }
 
-    /* ── Header banner ── */
+    /* ── HEADER: puur paars + logo PNG ── */
     .card-header {
-      background: var(--fl-purple);
-      padding: 2rem 2rem 1.75rem;
-      position: relative;
-      overflow: hidden;
-    }
-    /* F-logo blokken als achtergrondpatroon — getrouw aan het logo */
-    /* Rij 1: breed roze blok rechtsboven */
-    .card-header .bg-block-1 {
-      position: absolute;
-      top: 10px; right: 16px;
-      width: 88px; height: 44px;
-      background: var(--fl-pink);
-      border-radius: 4px;
-      opacity: .55;
-    }
-    /* Rij 2: smal roze blok links + leeg rechts */
-    .card-header .bg-block-2 {
-      position: absolute;
-      top: 62px; right: 110px;
-      width: 44px; height: 44px;
-      background: var(--fl-pink);
-      border-radius: 4px;
-      opacity: .55;
-    }
-    /* Rij 2: mint blok rechts (de 'F' balk) */
-    .card-header .bg-block-3 {
-      position: absolute;
-      top: 62px; right: 16px;
-      width: 44px; height: 44px;
-      background: var(--fl-mint);
-      border-radius: 4px;
-      opacity: .55;
-    }
-    /* Rij 3: breed roze blok linksonder */
-    .card-header .bg-block-4 {
-      position: absolute;
-      top: 114px; right: 110px;
-      width: 44px; height: 44px;
-      background: var(--fl-pink);
-      border-radius: 4px;
-      opacity: .35;
-    }
-    .eyebrow {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--fl-mint);
-      margin-bottom: .5rem;
-      position: relative;
-    }
-    h1 {
-      font-size: 28px;
-      font-weight: 900;
-      line-height: 1.15;
-      color: var(--fl-white);
-      position: relative;
-    }
-    h1 em {
-      font-style: normal;
-      color: var(--fl-mint);
-    }
-    .subtitle {
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.65);
-      margin-top: .5rem;
-      line-height: 1.55;
-      position: relative;
-    }
-
-    /* ── Footer logo PNG ── */
-    .fl-logo-img {
-      height: 40px;
-      width: auto;
-      display: block;
-      flex-shrink: 0;
-    }
-
-    /* ── Body padding ── */
-    .card-body { padding: 1.5rem 1.75rem 2rem; }
-
-    /* ── Steps row ── */
-    .steps-row {
+      background: var(--purple);
+      padding: 1.1rem 1.4rem 1rem;
       display: flex;
       align-items: center;
-      background: var(--fl-page-bg);
-      border-radius: 12px;
-      padding: .75rem 1rem;
-      margin-bottom: 1.5rem;
-      border: 1.5px solid var(--fl-border);
+      justify-content: space-between;
+      gap: 12px;
     }
-    .step { display: flex; align-items: center; gap: 8px; }
-    .step-dot {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
+    .header-text .eyebrow {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 3px;
+    }
+    .header-text h1 {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.15;
+    }
+    .header-text h1 em {
+      font-style: normal;
+      color: var(--mint);
+    }
+    .header-text .subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,.5);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .header-logo {
+      height: 52px;
+      width: auto;
       flex-shrink: 0;
     }
-    .step-dot i { font-size: 16px; color: var(--fl-purple); }
-    .step-label { font-size: 11px; font-weight: 800; color: var(--fl-ink); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
-    .step-label small { display: block; font-weight: 600; color: var(--fl-muted); font-size: 10px; text-transform: none; letter-spacing: 0; }
-    .step-arrow {
-      flex: 1; height: 2px;
-      background: var(--fl-border);
-      margin: 0 8px;
-      position: relative;
-    }
-    .step-arrow::after {
-      content: '';
-      position: absolute; right: -1px; top: -4px;
-      border: 5px solid transparent;
-      border-left: 6px solid var(--fl-border);
-    }
 
-    /* ── Video ── */
-    .video-wrap {
+    /* ── VIDEO + OVERLAY WRAPPER ── */
+    .video-section {
+      position: relative;
       width: 100%;
-      background: var(--fl-purple);
-      border-radius: 14px;
-      overflow: hidden;
-      border: 2px solid var(--fl-border);
+      background: var(--purple);
     }
-    .video-wrap video {
+    .video-section video {
       display: block;
       width: 100%;
       aspect-ratio: 9 / 16;
       object-fit: cover;
     }
 
-    /* ── Controls ── */
-    .controls {
-      margin-top: .85rem;
-      background: var(--fl-purple);
-      border-radius: 14px;
-      padding: 1rem 1.25rem;
+    /* ── STOP DOTS OVERLAY (top) ── */
+    .stops-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      padding: 10px 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      pointer-events: none;
+    }
+    .stops-track {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      pointer-events: all;
+    }
+    .stop-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      flex: 1;
+      background: none;
+      border: none;
+      padding: 0;
+      position: relative;
+    }
+    .stop-dot {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.25);
+      border: 2px solid rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s, border-color .15s, transform .1s;
+      backdrop-filter: blur(4px);
+    }
+    .stop-dot i { font-size: 11px; color: var(--white); }
+    .stop-btn.active .stop-dot {
+      background: var(--mint);
+      border-color: var(--mint);
+      transform: scale(1.15);
+    }
+    .stop-btn.active .stop-dot i { color: var(--purple); }
+    .stop-btn.passed .stop-dot {
+      background: rgba(247,168,242,0.6);
+      border-color: var(--pink);
+    }
+    .stop-label {
+      font-size: 8.5px;
+      font-weight: 800;
+      color: var(--white);
+      text-shadow: 0 1px 3px rgba(0,0,0,.6);
+      text-align: center;
+      max-width: 52px;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .stop-btn.active .stop-label { color: var(--mint); }
+
+    /* connector line between dots */
+    .stop-line {
+      flex: 1;
+      height: 2px;
+      background: rgba(255,255,255,0.3);
+      margin-bottom: 14px;
+      pointer-events: none;
+    }
+    .stop-line.passed { background: rgba(247,168,242,0.7); }
+
+    /* ── CONTROLS OVERLAY (bottom of video) ── */
+    .controls-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(30,25,60,0.92) 0%, rgba(30,25,60,0.0) 100%);
+      padding: 32px 14px 14px;
+      pointer-events: all;
     }
     .controls-top {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: .85rem;
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 8px;
     }
     .play-btn {
-      width: 42px; height: 42px;
-      border-radius: 10px;
-      background: var(--fl-mint);
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      background: var(--mint);
       border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       transition: background .15s, transform .1s;
     }
-    .play-btn:hover { background: #2de88a; transform: scale(1.05); }
-    .play-btn:active { transform: scale(.97); }
-    .play-btn i { font-size: 18px; color: var(--fl-purple); margin-left: 2px; }
+    .play-btn:hover  { background: #2de88a; }
+    .play-btn:active { transform: scale(.95); }
+    .play-btn i { font-size: 17px; color: var(--purple); margin-left: 2px; }
     .play-btn.playing i { margin-left: 0; }
-    .time-info { flex: 1; min-width: 0; }
-    .time-display { font-size: 14px; font-weight: 800; color: var(--fl-white); }
-    .time-sub { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    .scrubber-row { display: flex; align-items: center; gap: 10px; }
+    .time-info { flex: 1; min-width: 0; }
+    .time-display { font-size: 13px; font-weight: 800; color: var(--white); }
+    .time-sub {
+      font-size: 10px; font-weight: 600;
+      color: rgba(255,255,255,.6);
+      margin-top: 1px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .time-end { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.4); }
+
+    .scrubber-row { display: flex; align-items: center; gap: 8px; }
     .scrubber-wrap {
       flex: 1; position: relative;
-      height: 20px; display: flex; align-items: center; cursor: pointer;
+      height: 18px; display: flex; align-items: center;
     }
     .scrubber-track {
-      width: 100%; height: 5px;
-      background: rgba(255,255,255,.15);
-      border-radius: 3px; overflow: hidden;
+      width: 100%; height: 4px;
+      background: rgba(255,255,255,.2);
+      border-radius: 2px; overflow: hidden;
     }
     .scrubber-fill {
-      height: 100%; background: var(--fl-mint);
-      border-radius: 3px; width: 0%;
+      height: 100%; background: var(--mint);
+      border-radius: 2px; width: 0%;
     }
     .scrubber-wrap input[type=range] {
       position: absolute; width: 100%; opacity: 0;
-      height: 20px; cursor: pointer; margin: 0;
+      height: 18px; cursor: pointer; margin: 0;
     }
     .scrubber-thumb {
       position: absolute;
-      width: 15px; height: 15px;
+      width: 13px; height: 13px;
       border-radius: 4px;
-      background: var(--fl-mint);
-      border: 2px solid var(--fl-purple);
-      box-shadow: 0 1px 4px rgba(0,0,0,.3);
-      top: 50%; transform: translateY(-50%) translateX(-7px);
+      background: var(--mint);
+      border: 2px solid rgba(30,25,60,.8);
+      top: 50%; transform: translateY(-50%) translateX(-6px);
       pointer-events: none;
       left: 0%;
     }
-    .time-end { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.45); min-width: 32px; text-align: right; }
 
-    /* ── Waypoints ── */
-    .wp-section { margin-top: 1.25rem; }
-    .wp-title {
-      font-size: 10px; font-weight: 800;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--fl-muted); margin-bottom: .6rem;
-    }
-    .waypoints {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(138px, 1fr));
-      gap: 7px;
-    }
-    .wp {
-      background: var(--fl-card-bg);
-      border: 1.5px solid var(--fl-border);
-      border-radius: 10px;
-      padding: .6rem .75rem;
-      cursor: pointer;
-      transition: border-color .12s, background .12s, transform .1s;
-      position: relative; overflow: hidden;
-    }
-    .wp:hover { border-color: var(--fl-mint); background: #f3fff9; transform: translateY(-1px); }
-    .wp:active { transform: translateY(0); }
-    .wp.active {
-      border-color: var(--fl-mint);
-      background: #edfff6;
-    }
-    .wp.active::before {
-      content: ''; position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px; background: var(--fl-mint);
-      border-radius: 0 2px 2px 0;
-    }
-    .wp.passed:not(.active)::before {
-      content: ''; position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px; background: var(--fl-pink);
-      border-radius: 0 2px 2px 0;
-    }
-    .wp-num { font-size: 9px; font-weight: 800; color: var(--fl-muted); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .08em; }
-    .wp-label { font-size: 11.5px; font-weight: 700; color: var(--fl-ink); line-height: 1.3; }
-    .wp-time { font-size: 10px; font-weight: 600; color: var(--fl-muted); margin-top: 3px; }
-
-    /* ── Note ── */
-    .note {
-      margin-top: 1rem;
-      font-size: 11px; font-weight: 600; color: var(--fl-muted);
-      display: flex; gap: 6px; align-items: flex-start; line-height: 1.5;
-    }
-    .note i { flex-shrink: 0; margin-top: 1px; font-size: 13px; color: var(--fl-mint); filter: brightness(.8); }
-
-    /* ── Footer ── */
+    /* ── FOOTER ── */
     .footer {
-      margin-top: 1.75rem;
-      padding-top: 1.25rem;
-      border-top: 1.5px solid var(--fl-border);
-      display: flex; align-items: center; justify-content: space-between;
+      background: var(--purple);
+      padding: .75rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 12px;
     }
+    .footer-logo { height: 30px; width: auto; }
     .footer-address {
-      font-size: 10.5px; font-weight: 600; color: var(--fl-muted);
+      font-size: 10px; font-weight: 600;
+      color: rgba(255,255,255,.45);
       text-align: right; line-height: 1.55;
     }
-    .footer-address a { color: var(--fl-muted); text-decoration: none; }
-    .footer-address a:hover { color: var(--fl-purple); }
-
-    @media (max-width: 480px) {
-      body { padding: 1rem .5rem 3rem; }
-      .card-header { padding: 1.5rem 1.25rem 1.5rem; }
-      h1 { font-size: 23px; }
-      .card-body { padding: 1.25rem 1.25rem 1.75rem; }
-      .steps-row { flex-wrap: wrap; gap: 8px; }
-      .step-arrow { display: none; }
-    }
+    .footer-address a { color: rgba(255,255,255,.55); text-decoration: none; }
+    .footer-address a:hover { color: var(--mint); }
   </style>
 </head>
 <body>
-
 <main class="card">
 
+  <!-- HEADER -->
   <div class="card-header">
-    <div class="bg-block-1" aria-hidden="true"></div>
-    <div class="bg-block-2" aria-hidden="true"></div>
-    <div class="bg-block-3" aria-hidden="true"></div>
-    <div class="bg-block-4" aria-hidden="true"></div>
-    <p class="eyebrow">Bezoekersroute</p>
-    <h1>Route naar<br><em>Flatland</em></h1>
-    <p class="subtitle">Van Rotterdam Centraal tot aan de lift. Speel af of spring naar een waypoint.</p>
+    <div class="header-text">
+      <p class="eyebrow">Bezoekersroute</p>
+      <h1>Route naar <em>Flatland</em></h1>
+      <p class="subtitle">Rotterdam CS → lift, 12e verdieping</p>
+    </div>
+    <img src="logo_flatland.png" alt="Flatland" class="header-logo">
   </div>
 
-  <div class="card-body">
+  <!-- VIDEO + OVERLAYS -->
+  <div class="video-section">
+    <video id="vid" playsinline preload="metadata">
+      <source src="gemini_input.mp4" type="video/mp4">
+    </video>
 
-    <div class="steps-row">
-      <div class="step">
-        <div class="step-dot" style="background:var(--fl-mint)">
-          <i class="ti ti-train" aria-hidden="true"></i>
-        </div>
-        <div class="step-label">Rotterdam CS<small>Startpunt</small></div>
-      </div>
-      <div class="step-arrow"></div>
-      <div class="step">
-        <div class="step-dot" style="background:var(--fl-pink)">
-          <i class="ti ti-walk" aria-hidden="true"></i>
-        </div>
-        <div class="step-label">Weena Passage<small>~5 min lopen</small></div>
-      </div>
-      <div class="step-arrow"></div>
-      <div class="step">
-        <div class="step-dot" style="background:var(--fl-purple); border: 2px solid var(--fl-border)">
-          <i class="ti ti-door-enter" style="color:var(--fl-mint)" aria-hidden="true"></i>
-        </div>
-        <div class="step-label">Flatland<small>12e verdieping</small></div>
-      </div>
+    <!-- Stop dots bovenin video -->
+    <div class="stops-overlay">
+      <div class="stops-track" id="stopsTrack"></div>
     </div>
 
-    <div class="video-wrap">
-      <video id="vid" playsinline preload="metadata">
-        <source src="gemini_input.mp4" type="video/mp4">
-        Je browser ondersteunt geen video.
-      </video>
-    </div>
-
-    <div class="controls">
+    <!-- Controls onderin video -->
+    <div class="controls-overlay">
       <div class="controls-top">
         <button class="play-btn" id="playBtn" aria-label="Afspelen">
           <i class="ti ti-player-play" id="playIcon"></i>
         </button>
         <div class="time-info">
           <div class="time-display" id="timeDisplay">0:00</div>
-          <div class="time-sub" id="timeSub">Rotterdam Centraal – startpunt</div>
-        </div>
-      </div>
-      <div class="scrubber-row">
-        <div class="scrubber-wrap">
-          <div class="scrubber-track">
-            <div class="scrubber-fill" id="scrubFill"></div>
-          </div>
-          <div class="scrubber-thumb" id="scrubThumb"></div>
-          <input type="range" id="scrubber" min="0" max="1000" value="0" step="1" aria-label="Videopositie">
+          <div class="time-sub" id="timeSub">Rotterdam Centraal</div>
         </div>
         <span class="time-end" id="timeEnd">0:29</span>
       </div>
-    </div>
-
-    <div class="wp-section">
-      <p class="wp-title">Waypoints — klik om direct te springen</p>
-      <div class="waypoints" id="waypoints" role="list"></div>
-    </div>
-
-    <div class="note">
-      <i class="ti ti-info-circle" aria-hidden="true"></i>
-      <span>Roze streep = gepasseerd &nbsp;·&nbsp; Groen = huidige positie. Klik een waypoint om direct naar dat moment te springen.</span>
-    </div>
-
-    <div class="footer">
-      <img src="logo_flatland.png" alt="Flatland" class="fl-logo-img">
-      <div class="footer-address">
-        Weena 70, 12e verdieping · 3012 CM Rotterdam<br>
-        <a href="https://flatland.nl" target="_blank" rel="noopener">flatland.nl</a>
-        &nbsp;·&nbsp;
-        <a href="tel:+31106690079">010 669 0079</a>
+      <div class="scrubber-row">
+        <div class="scrubber-wrap">
+          <div class="scrubber-track"><div class="scrubber-fill" id="scrubFill"></div></div>
+          <div class="scrubber-thumb" id="scrubThumb"></div>
+          <input type="range" id="scrubber" min="0" max="1000" value="0" step="1" aria-label="Videopositie">
+        </div>
       </div>
     </div>
-
   </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <img src="logo_flatland.png" alt="Flatland" class="footer-logo">
+    <div class="footer-address">
+      Weena 70, 12e verdieping · Rotterdam<br>
+      <a href="https://flatland.nl" target="_blank" rel="noopener">flatland.nl</a>
+      &nbsp;·&nbsp;
+      <a href="tel:+31106690079">010 669 0079</a>
+    </div>
+  </div>
+
 </main>
 
 <script>
+  // 5 stops (samengevat uit de 10 waypoints voor compacte weergave)
+  const STOPS = [
+    { pct:  0,    icon: 'ti-train',       label: 'Rotterdam CS' },
+    { pct: 20.7,  icon: 'ti-building',    label: 'Millennium' },
+    { pct: 41.4,  icon: 'ti-walk',        label: 'W 200' },
+    { pct: 62.1,  icon: 'ti-coffee',      label: 'Seoul Sen.' },
+    { pct: 86.2,  icon: 'ti-door-enter',  label: 'Lobby' },
+  ];
+
+  // Full 10 waypoints for scrubber label sync
   const WAYPOINTS = [
-    { pct: 0,    time: "0:00", label: "Startpunt – Rotterdam CS" },
-    { pct: 10.3, time: "0:03", label: "Kruisplein / zebrapad" },
-    { pct: 20.7, time: "0:06", label: "Millennium Tower (hoek)" },
-    { pct: 31.0, time: "0:09", label: "Ingang Passage" },
-    { pct: 41.4, time: "0:12", label: "Langs Gebouw W 200" },
-    { pct: 51.7, time: "0:15", label: "Midden van de Passage" },
-    { pct: 62.1, time: "0:18", label: "Langs Terras – Seoul Sensation" },
-    { pct: 75.9, time: "0:22", label: "Ingang Weena Central" },
-    { pct: 86.2, time: "0:25", label: "Lobby (via draaideur)" },
-    { pct: 96.6, time: "0:28", label: "In de lift" },
+    { pct:  0,    label: 'Rotterdam Centraal' },
+    { pct: 10.3,  label: 'Kruisplein / zebrapad' },
+    { pct: 20.7,  label: 'Millennium Tower' },
+    { pct: 31.0,  label: 'Ingang Passage' },
+    { pct: 41.4,  label: 'Langs W 200' },
+    { pct: 51.7,  label: 'Midden Passage' },
+    { pct: 62.1,  label: 'Seoul Sensation' },
+    { pct: 75.9,  label: 'Weena Central' },
+    { pct: 86.2,  label: 'Lobby (draaideur)' },
+    { pct: 96.6,  label: 'In de lift' },
   ];
 
   const TOTAL = 29;
-  const vid = document.getElementById('vid');
+  const vid   = document.getElementById('vid');
   let scrubbing = false;
 
   function fmt(s) {
     s = Math.max(0, Math.round(s));
-    return Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
+    return Math.floor(s/60) + ':' + (s%60 < 10 ? '0' : '') + (s%60);
   }
 
-  // Build waypoint buttons
-  const wpContainer = document.getElementById('waypoints');
-  WAYPOINTS.forEach((wp, i) => {
-    const el = document.createElement('div');
-    el.className = 'wp' + (i === 0 ? ' active' : '');
-    el.setAttribute('role', 'listitem');
-    el.innerHTML = `<div class="wp-num">stap ${i + 1} / 10</div><div class="wp-label">${wp.label}</div><div class="wp-time">${wp.time}</div>`;
-    el.addEventListener('click', () => {
-      vid.currentTime = (wp.pct / 100) * (vid.duration || TOTAL);
+  // Build stop buttons
+  const track = document.getElementById('stopsTrack');
+  STOPS.forEach((s, i) => {
+    if (i > 0) {
+      const line = document.createElement('div');
+      line.className = 'stop-line';
+      line.id = 'line-' + i;
+      track.appendChild(line);
+    }
+    const btn = document.createElement('button');
+    btn.className = 'stop-btn' + (i === 0 ? ' active' : '');
+    btn.id = 'stop-' + i;
+    btn.setAttribute('aria-label', s.label);
+    btn.innerHTML = `
+      <div class="stop-dot"><i class="ti ${s.icon}"></i></div>
+      <span class="stop-label">${s.label}</span>
+    `;
+    btn.addEventListener('click', () => {
+      vid.currentTime = (s.pct / 100) * (vid.duration || TOTAL);
       vid.play();
     });
-    wpContainer.appendChild(el);
+    track.appendChild(btn);
   });
 
   function updateUI() {
-    const dur = vid.duration || TOTAL;
-    const t   = vid.currentTime || 0;
+    const dur  = vid.duration || TOTAL;
+    const t    = vid.currentTime || 0;
     const frac = t / dur;
     const pct  = frac * 100;
 
+    // scrubber
     document.getElementById('scrubber').value = Math.round(frac * 1000);
     document.getElementById('scrubFill').style.width = pct + '%';
     document.getElementById('scrubThumb').style.left = pct + '%';
     document.getElementById('timeDisplay').textContent = fmt(t);
 
-    let active = WAYPOINTS[0];
-    WAYPOINTS.forEach(wp => { if (pct >= wp.pct) active = wp; });
-    document.getElementById('timeSub').textContent = active.label;
+    // waypoint label
+    let activeWP = WAYPOINTS[0];
+    WAYPOINTS.forEach(w => { if (pct >= w.pct) activeWP = w; });
+    document.getElementById('timeSub').textContent = activeWP.label;
 
-    document.querySelectorAll('.wp').forEach((el, i) => {
-      const wp = WAYPOINTS[i];
-      el.classList.toggle('active', wp === active);
-      el.classList.toggle('passed', wp !== active && pct > wp.pct);
+    // stop dots
+    let activeStop = STOPS[0];
+    STOPS.forEach(s => { if (pct >= s.pct) activeStop = s; });
+    STOPS.forEach((s, i) => {
+      const btn  = document.getElementById('stop-' + i);
+      const passed = pct > s.pct && s !== activeStop;
+      btn.classList.toggle('active', s === activeStop);
+      btn.classList.toggle('passed', passed);
+      if (i > 0) {
+        document.getElementById('line-' + i).classList.toggle('passed', pct >= s.pct);
+      }
     });
   }
 
   vid.addEventListener('loadedmetadata', () => {
     document.getElementById('timeEnd').textContent = fmt(vid.duration);
   });
-
   vid.addEventListener('timeupdate', () => { if (!scrubbing) updateUI(); });
 
   const playBtn  = document.getElementById('playBtn');
   const playIcon = document.getElementById('playIcon');
-
-  function syncPlayBtn() {
-    const playing = !vid.paused;
-    playIcon.className = playing ? 'ti ti-player-pause' : 'ti ti-player-play';
-    playBtn.classList.toggle('playing', playing);
-    playBtn.setAttribute('aria-label', playing ? 'Pauzeren' : 'Afspelen');
-    playIcon.style.marginLeft = playing ? '0' : '2px';
+  function syncBtn() {
+    const p = !vid.paused;
+    playIcon.className = p ? 'ti ti-player-pause' : 'ti ti-player-play';
+    playBtn.classList.toggle('playing', p);
+    playBtn.setAttribute('aria-label', p ? 'Pauzeren' : 'Afspelen');
+    playIcon.style.marginLeft = p ? '0' : '2px';
   }
-
-  playBtn.addEventListener('click', () => { vid.paused ? vid.play() : vid.pause(); });
-  vid.addEventListener('play',  syncPlayBtn);
-  vid.addEventListener('pause', syncPlayBtn);
-  vid.addEventListener('ended', () => { syncPlayBtn(); updateUI(); });
+  playBtn.addEventListener('click', () => vid.paused ? vid.play() : vid.pause());
+  vid.addEventListener('play',  syncBtn);
+  vid.addEventListener('pause', syncBtn);
+  vid.addEventListener('ended', () => { syncBtn(); updateUI(); });
 
   const scrubEl = document.getElementById('scrubber');
   scrubEl.addEventListener('mousedown',  () => { scrubbing = true; });
   scrubEl.addEventListener('touchstart', () => { scrubbing = true; }, { passive: true });
   scrubEl.addEventListener('input', e => {
     const frac = e.target.value / 1000;
-    const dur  = vid.duration || TOTAL;
     const pct  = frac * 100;
     document.getElementById('scrubFill').style.width  = pct + '%';
     document.getElementById('scrubThumb').style.left  = pct + '%';
-    document.getElementById('timeDisplay').textContent = fmt(frac * dur);
+    document.getElementById('timeDisplay').textContent = fmt(frac * (vid.duration || TOTAL));
   });
   scrubEl.addEventListener('change', e => {
     vid.currentTime = (e.target.value / 1000) * (vid.duration || TOTAL);
