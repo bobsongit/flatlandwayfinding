@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+  <title>Route naar Flatland – vanaf Rotterdam CS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --fl-ink: #1a1a1a;
+      --fl-muted: #6b6b6b;
+      --fl-accent: #f5a623;
+      --fl-accent-light: #fffbf0;
+      --fl-accent-hover: #fffdf5;
+      --fl-green: #1a9e75;
+      --fl-border: rgba(0,0,0,0.1);
+      --fl-surface: #f9f8f6;
+      --fl-bg: #ffffff;
+      --fl-page-bg: #f4f2ee;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--fl-page-bg);
+      color: var(--fl-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .card {
+      background: var(--fl-bg);
+      border-radius: 16px;
+      border: 0.5px solid var(--fl-border);
+      padding: 2rem 2rem 2.5rem;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--fl-muted);
+      margin-bottom: .4rem;
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--fl-ink);
+      margin-bottom: .4rem;
+    }
+    h1 span { color: var(--fl-accent); }
+    .subtitle {
+      font-size: 14px;
+      color: var(--fl-muted);
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+    }
+
+    .steps-row {
+      display: flex;
+      align-items: center;
+      background: var(--fl-surface);
+      border-radius: 12px;
+      padding: .75rem 1rem;
+      border: 0.5px solid var(--fl-border);
+      margin-bottom: 1.5rem;
+    }
+    .step { display: flex; align-items: center; gap: 8px; }
+    .step-dot {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-dot i { font-size: 15px; color: #fff; }
+    .step-label { font-size: 12px; font-weight: 500; color: var(--fl-ink); line-height: 1.2; }
+    .step-label small { display: block; font-weight: 400; color: var(--fl-muted); font-size: 11px; }
+    .step-arrow {
+      flex: 1; height: 1px;
+      background: var(--fl-border);
+      margin: 0 8px;
+      position: relative;
+    }
+    .step-arrow::after {
+      content: '';
+      position: absolute; right: -1px; top: -3px;
+      border: 4px solid transparent;
+      border-left: 5px solid var(--fl-border);
+    }
+
+    /* Native video */
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 0.5px solid var(--fl-border);
+    }
+    .video-wrap video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+    }
+
+    /* Controls */
+    .controls {
+      margin-top: .85rem;
+      background: var(--fl-surface);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      border: 0.5px solid var(--fl-border);
+    }
+    .controls-top {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: .85rem;
+    }
+    .play-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--fl-ink);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background .15s;
+    }
+    .play-btn:hover { background: #333; }
+    .play-btn i { font-size: 17px; color: #fff; margin-left: 2px; }
+    .play-btn.playing i { margin-left: 0; }
+    .time-info { flex: 1; min-width: 0; }
+    .time-display { font-size: 13px; font-weight: 500; color: var(--fl-ink); }
+    .time-sub { font-size: 11px; color: var(--fl-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .scrubber-row { display: flex; align-items: center; gap: 10px; }
+    .scrubber-wrap {
+      flex: 1; position: relative;
+      height: 20px; display: flex; align-items: center; cursor: pointer;
+    }
+    .scrubber-track {
+      width: 100%; height: 4px;
+      background: var(--fl-border);
+      border-radius: 2px; overflow: hidden;
+    }
+    .scrubber-fill {
+      height: 100%; background: var(--fl-accent);
+      border-radius: 2px; width: 0%;
+    }
+    .scrubber-wrap input[type=range] {
+      position: absolute; width: 100%; opacity: 0;
+      height: 20px; cursor: pointer; margin: 0;
+    }
+    .scrubber-thumb {
+      position: absolute;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--fl-accent);
+      border: 2px solid #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,.25);
+      top: 50%; transform: translateY(-50%) translateX(-7px);
+      pointer-events: none;
+      left: 0%;
+    }
+    .time-end { font-size: 12px; color: var(--fl-muted); min-width: 32px; text-align: right; }
+
+    .wp-section { margin-top: .85rem; }
+    .wp-title {
+      font-size: 11px; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--fl-muted);
+      margin-bottom: .5rem;
+    }
+    .waypoints {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 6px;
+    }
+    .wp {
+      background: var(--fl-bg);
+      border: 0.5px solid var(--fl-border);
+      border-radius: 10px;
+      padding: .6rem .75rem;
+      cursor: pointer;
+      transition: border-color .12s, background .12s;
+      position: relative; overflow: hidden;
+    }
+    .wp:hover { border-color: rgba(245,166,35,.5); background: var(--fl-accent-hover); }
+    .wp.active { border-color: var(--fl-accent); background: var(--fl-accent-light); }
+    .wp.active::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--fl-accent);
+    }
+    .wp.passed:not(.active)::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--fl-green);
+    }
+    .wp-num { font-size: 10px; color: var(--fl-muted); margin-bottom: 2px; }
+    .wp-label { font-size: 12px; font-weight: 500; color: var(--fl-ink); line-height: 1.3; }
+    .wp-time { font-size: 11px; color: var(--fl-muted); margin-top: 2px; }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 12px; color: var(--fl-muted);
+      display: flex; gap: 6px; align-items: flex-start; line-height: 1.5;
+    }
+    .note i { flex-shrink: 0; margin-top: 1px; font-size: 14px; color: var(--fl-accent); }
+
+    .footer {
+      margin-top: 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 0.5px solid var(--fl-border);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+    }
+    .footer-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 16px; color: var(--fl-ink);
+    }
+    .footer-brand span { color: var(--fl-accent); }
+    .footer-address {
+      font-size: 11px; color: var(--fl-muted);
+      text-align: right; line-height: 1.5;
+    }
+    .footer-address a { color: var(--fl-muted); text-decoration: none; }
+    .footer-address a:hover { color: var(--fl-ink); }
+
+    @media (max-width: 480px) {
+      body { padding: 1rem .75rem 3rem; }
+      .card { padding: 1.5rem 1.25rem 2rem; }
+      h1 { font-size: 24px; }
+      .steps-row { flex-wrap: wrap; gap: 8px; }
+      .step-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<main class="card">
+  <p class="eyebrow">Bezoekersroute</p>
+  <h1>Route naar <span>Flatland</span></h1>
+  <p class="subtitle">Van Rotterdam Centraal tot aan de lift. Speel de video af of klik op een waypoint om direct naar dat moment te springen.</p>
+
+  <div class="steps-row">
+    <div class="step">
+      <div class="step-dot" style="background:var(--fl-accent)">
+        <i class="ti ti-train" aria-hidden="true"></i>
+      </div>
+      <div class="step-label">Rotterdam CS<small>Startpunt</small></div>
+    </div>
+    <div class="step-arrow"></div>
+    <div class="step">
+      <div class="step-dot" style="background:#999">
+        <i class="ti ti-walk" aria-hidden="true"></i>
+      </div>
+      <div class="step-label">Weena Passage<small>~5 min lopen</small></div>
+    </div>
+    <div class="step-arrow"></div>
+    <div class="step">
+      <div class="step-dot" style="background:var(--fl-green)">
+        <i class="ti ti-door-enter" aria-hidden="true"></i>
+      </div>
+      <div class="step-label">Flatland<small>Lift / 5e verdieping</small></div>
+    </div>
+  </div>
+
+  <div class="video-wrap">
+    <video id="vid" playsinline preload="metadata">
+      <source src="gemini_input.mp4" type="video/mp4">
+      Je browser ondersteunt geen video.
+    </video>
+  </div>
+
+  <div class="controls">
+    <div class="controls-top">
+      <button class="play-btn" id="playBtn" aria-label="Afspelen">
+        <i class="ti ti-player-play" id="playIcon"></i>
+      </button>
+      <div class="time-info">
+        <div class="time-display" id="timeDisplay">0:00</div>
+        <div class="time-sub" id="timeSub">Rotterdam Centraal – startpunt</div>
+      </div>
+    </div>
+    <div class="scrubber-row">
+      <div class="scrubber-wrap">
+        <div class="scrubber-track">
+          <div class="scrubber-fill" id="scrubFill"></div>
+        </div>
+        <div class="scrubber-thumb" id="scrubThumb"></div>
+        <input type="range" id="scrubber" min="0" max="1000" value="0" step="1" aria-label="Videopositie">
+      </div>
+      <span class="time-end" id="timeEnd">0:29</span>
+    </div>
+  </div>
+
+  <div class="wp-section">
+    <p class="wp-title">Waypoints — klik om direct te springen</p>
+    <div class="waypoints" id="waypoints" role="list"></div>
+  </div>
+
+  <div class="note">
+    <i class="ti ti-info-circle" aria-hidden="true"></i>
+    <span>Groene streep = al gepasseerd &nbsp;·&nbsp; Oranje streep = huidige positie. Klik een waypoint om direct naar dat moment te springen.</span>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">Flat<span>land</span></div>
+    <div class="footer-address">
+      Weena 200, 3012 NJ Rotterdam<br>
+      <a href="https://flatland.nl" target="_blank" rel="noopener">flatland.nl</a>
+    </div>
+  </div>
+</main>
+
+<script>
+  const WAYPOINTS = [
+    { pct: 0,    time: "0:00", label: "Startpunt – Rotterdam CS" },
+    { pct: 10.3, time: "0:03", label: "Kruisplein / zebrapad" },
+    { pct: 20.7, time: "0:06", label: "Millennium Tower (hoek)" },
+    { pct: 31.0, time: "0:09", label: "Ingang Passage" },
+    { pct: 41.4, time: "0:12", label: "Langs Gebouw W 200" },
+    { pct: 51.7, time: "0:15", label: "Midden van de Passage" },
+    { pct: 62.1, time: "0:18", label: "Langs Terras – Seoul Sensation" },
+    { pct: 75.9, time: "0:22", label: "Ingang Weena Central" },
+    { pct: 86.2, time: "0:25", label: "Lobby (via draaideur)" },
+    { pct: 96.6, time: "0:28", label: "In de lift" },
+  ];
+
+  const vid = document.getElementById('vid');
+  let scrubbing = false;
+
+  function fmt(s) {
+    s = Math.max(0, Math.round(s));
+    return Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
+  }
+
+  // Build waypoint buttons
+  const wpContainer = document.getElementById('waypoints');
+  WAYPOINTS.forEach((wp, i) => {
+    const el = document.createElement('div');
+    el.className = 'wp' + (i === 0 ? ' active' : '');
+    el.setAttribute('role', 'listitem');
+    el.innerHTML = `<div class="wp-num">stap ${i + 1}/10</div><div class="wp-label">${wp.label}</div><div class="wp-time">${wp.time}</div>`;
+    el.addEventListener('click', () => {
+      const dur = vid.duration || 29;
+      vid.currentTime = (wp.pct / 100) * dur;
+      vid.play();
+    });
+    wpContainer.appendChild(el);
+  });
+
+  // Update UI from video state
+  function updateUI() {
+    const dur = vid.duration || 29;
+    const t = vid.currentTime || 0;
+    const frac = t / dur;
+    const pct = frac * 100;
+
+    document.getElementById('scrubber').value = Math.round(frac * 1000);
+    document.getElementById('scrubFill').style.width = pct + '%';
+    document.getElementById('scrubThumb').style.left = pct + '%';
+    document.getElementById('timeDisplay').textContent = fmt(t);
+
+    let active = WAYPOINTS[0];
+    WAYPOINTS.forEach(wp => { if (pct >= wp.pct) active = wp; });
+    document.getElementById('timeSub').textContent = active.label;
+
+    document.querySelectorAll('.wp').forEach((el, i) => {
+      const wp = WAYPOINTS[i];
+      el.classList.toggle('active', wp === active);
+      el.classList.toggle('passed', wp !== active && pct > wp.pct);
+    });
+  }
+
+  // Set total duration once known
+  vid.addEventListener('loadedmetadata', () => {
+    document.getElementById('timeEnd').textContent = fmt(vid.duration);
+  });
+
+  // Sync scrubber while playing
+  vid.addEventListener('timeupdate', () => {
+    if (!scrubbing) updateUI();
+  });
+
+  // Play/pause button
+  const playBtn = document.getElementById('playBtn');
+  const playIcon = document.getElementById('playIcon');
+
+  function syncPlayBtn() {
+    const playing = !vid.paused;
+    playIcon.className = playing ? 'ti ti-player-pause' : 'ti ti-player-play';
+    playBtn.classList.toggle('playing', playing);
+    playBtn.setAttribute('aria-label', playing ? 'Pauzeren' : 'Afspelen');
+  }
+
+  playBtn.addEventListener('click', () => {
+    if (vid.paused) { vid.play(); } else { vid.pause(); }
+  });
+
+  vid.addEventListener('play', syncPlayBtn);
+  vid.addEventListener('pause', syncPlayBtn);
+  vid.addEventListener('ended', () => { syncPlayBtn(); updateUI(); });
+
+  // Scrubber input
+  const scrubEl = document.getElementById('scrubber');
+
+  scrubEl.addEventListener('mousedown', () => { scrubbing = true; });
+  scrubEl.addEventListener('touchstart', () => { scrubbing = true; }, { passive: true });
+
+  scrubEl.addEventListener('input', e => {
+    const frac = e.target.value / 1000;
+    const dur = vid.duration || 29;
+    // Update visual only while dragging
+    const pct = frac * 100;
+    document.getElementById('scrubFill').style.width = pct + '%';
+    document.getElementById('scrubThumb').style.left = pct + '%';
+    document.getElementById('timeDisplay').textContent = fmt(frac * dur);
+  });
+
+  scrubEl.addEventListener('change', e => {
+    const frac = e.target.value / 1000;
+    vid.currentTime = frac * (vid.duration || 29);
+    scrubbing = false;
+    updateUI();
+  });
+
+  scrubEl.addEventListener('mouseup', () => { scrubbing = false; });
+  scrubEl.addEventListener('touchend', () => { scrubbing = false; });
+</script>
+</body>
+</html>
